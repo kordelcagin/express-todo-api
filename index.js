@@ -22,6 +22,16 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const userRoutes = require("./routes/User");
+app.use("/user", userRoutes);
+
+const tokenMiddleware = require("./middleware/Token");
+app.use("/", tokenMiddleware);
+
+app.get("/", (req, res) => {
+  res.json({ status: true, data: null, message: "Hello World" });
+});
+
 //middleware
 app.use((req, res, next) => {
   console.log("Middleware called.");
@@ -30,7 +40,7 @@ app.use((req, res, next) => {
 });
 
 const todoRoutes = require("./routes/Todo");
-app.use("/", todoRoutes);
+app.use("/todo", todoRoutes);
 
 // Not Found handler
 app.use((req, res, next) => {

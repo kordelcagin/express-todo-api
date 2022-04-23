@@ -20,7 +20,7 @@ exports.getTodo = async (req, res) => {
     if (err || !todo) {
       return res.status(400).json({
         status: false,
-        error: "404 todo not found",
+        error: "todo not found",
       });
     }
     res.json({ status: true, data: todo });
